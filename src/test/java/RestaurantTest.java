@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,7 +53,6 @@ class RestaurantTest {
     @Test
     public void removing_item_from_menu_should_decrease_menu_size_by_1() throws itemNotFoundException {
 
-        restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
         restaurant.addToMenu("Sweet corn soup",119);
         restaurant.addToMenu("Vegetable lasagne", 269);
 
@@ -62,7 +63,6 @@ class RestaurantTest {
     @Test
     public void removing_item_that_does_not_exist_should_throw_exception() {
 
-        restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
         restaurant.addToMenu("Sweet corn soup",119);
         restaurant.addToMenu("Vegetable lasagne", 269);
 
@@ -70,4 +70,17 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void getTotalPrice_should_return_the_total_price_of_the_selected_item(){
+        restaurant.addToMenu("Sweet corn soup",119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+        Item item1 = new Item("Sweet corn soup",119);
+        Item item2 = new Item("Vegetable lasagne", 269);
+        List<Item> selectedItem= new ArrayList<>();
+        selectedItem.add(item1);
+        selectedItem.add(item2);
+        int totalSum=restaurant.getTotalPrice(selectedItem);
+        assertEquals(388,totalSum);
+
+    }
 }
