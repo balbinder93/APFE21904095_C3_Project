@@ -70,5 +70,12 @@ public class Restaurant {
         return name;
     }
 
+    public int getTotalPrice(List<Item> selectedItem){
+        int totalPrice=0;
+        for (Item item:selectedItem){
+            totalPrice+=item.getPrice();
+        }
+        return totalPrice;
+    }
 
 }
